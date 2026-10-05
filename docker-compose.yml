@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  supabase-mcp:
+    build: .
+    container_name: supabase-mcp
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - AUTH_TOKEN=${AUTH_TOKEN:-}
+      - TABLE_CONTACTS=${TABLE_CONTACTS:-contacts}
+      - TABLE_CONVERSATIONS=${TABLE_CONVERSATIONS:-conversations}
+      - TABLE_MESSAGES=${TABLE_MESSAGES:-messages}
+    env_file:
+      - .env
